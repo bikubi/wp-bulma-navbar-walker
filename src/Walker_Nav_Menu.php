@@ -61,7 +61,7 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$indent = str_repeat( $t, $depth );
 
 		// Default class.
-		$classes = array( 'sub-menu' );
+		$classes = array( 'navbar-dropdown', 'sub-menu' );
 
 		/**
 		 * Filters the CSS class(es) applied to a menu list element.
@@ -75,7 +75,7 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
 		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-		$output .= "{$n}{$indent}<ul$class_names>{$n}";
+		$output .= "{$n}{$indent}<div$class_names>{$n}";
 	}
 
 	/**
@@ -98,7 +98,7 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 			$n = "\n";
 		}
 		$indent = str_repeat( $t, $depth );
-		$output .= "$indent</ul>{$n}";
+		$output .= "$indent</div>{$n}";
 	}
 
 	/**
@@ -126,7 +126,13 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$indent = ( $depth ) ? str_repeat( $t, $depth ) : '';
 
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+		$classes[] = 'navbar-item';
 		$classes[] = 'menu-item-' . $item->ID;
+
+		if ($args->walker->has_children) {
+			$classes[] = 'has-dropdown';
+			$classes[] = 'is-hoverable';
+		}
 
 		/**
 		 * Filters the arguments for a single nav menu item.
@@ -167,13 +173,18 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args, $depth );
 		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-		$output .= $indent . '<li' . $id . $class_names .'>';
+		$output .= $indent . '<div' . $id . $class_names .'>';
 
 		$atts = array();
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
 		$atts['target'] = ! empty( $item->target )     ? $item->target     : '';
 		$atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
 		$atts['href']   = ! empty( $item->url )        ? $item->url        : '';
+
+		if ($args->walker->has_children) {
+			echo "<!--".print_r($item,1)."-->";
+			$atts['class'] = 'navbar-link';
+		}
 
 		/**
 		 * Filters the HTML attributes applied to a menu item's anchor element.
@@ -261,7 +272,7 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 			$t = "\t";
 			$n = "\n";
 		}
-		$output .= "</li>{$n}";
+		$output .= "</div>{$n}";
 	}
 
 } // Walker_Nav_Menu
