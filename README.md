@@ -30,3 +30,4 @@ Supports sub-menus/dropdowns.
 ## Notes
 
 - Inspired by [github.com/ridgey28/WP-Bulma-Navwalker](https://github.com/ridgey28/WP-Bulma-Navwalker). It almost worked for me but I ran into problems with functions that use the `walker_nav_menu_start_el` filter and depend on `$args` being a `stdClass` object. YMMV.
+- I just found [saffa803/sage-bulma-navwalker/blob/master/bulma-navwalker.php](https://github.com/saffa803/sage-bulma-navwalker/blob/master/bulma-navwalker.php). Sigh. It uses `<li>`s which need some extra CSS to be presented in a row (that is, a `navbar`).

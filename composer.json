@@ -5,9 +5,12 @@
     "authors": [
         {
             "name": "Jakob Wierzba",
-            "email": "github@jakobwierzba.de"
+            "email": "github@jakobwierzba.de",
+            "homepage": "http://jakobwierzba.de"
         }
     ],
+    "homepage": "https://github.com/bikubi/wp-bulma-navbar-walker",
+    "keywords": ["wordpress", "bulma", "navwalker", "navbar"],
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.0"
