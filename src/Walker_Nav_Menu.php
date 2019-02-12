@@ -1,6 +1,13 @@
 <?php
 
-namespace Bikubi\BulmaNavbarWalker;
+namespace Bikubi\WPBulmaNavbarWalker;
+
+/* This is wp-includes/class-walker-nav-menu.php with a few small patches,
+ * namespaced; shouldn't interfere with even ancient PHPs/WordPresses.
+ * I'm leaving WordPresses comments here as-is, which should make updating
+ * this easier in the future. Feel free to remove them should they collide
+ * with WordPress in your IDE, I guess?
+ */
 
 /**
  * Nav Menu API: Walker_Nav_Menu class
