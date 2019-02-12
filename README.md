@@ -22,7 +22,7 @@ Supports sub-menus/dropdowns.
           'walker'         => new \Bikubi\WPBulmaNavbarWalker\Walker_Nav_Menu
         ));
       }
-    </div>
+    ?></div>
   </div>
 </nav>
 ```
