@@ -173,7 +173,12 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args, $depth );
 		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-		$output .= $indent . '<div' . $id . $class_names .'>';
+		if ( $args->walker->has_children ) {
+			$output .= $indent . '<div' . $id . $class_names .'>';
+		}
+		else {
+			$output .= $indent;
+		}
 
 		$atts = array();
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
@@ -182,7 +187,6 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$atts['href']   = ! empty( $item->url )        ? $item->url        : '';
 
 		if ($args->walker->has_children) {
-			echo "<!--".print_r($item,1)."-->";
 			$atts['class'] = 'navbar-link';
 		}
 
@@ -230,7 +234,12 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
 		$item_output = $args->before;
-		$item_output .= '<a'. $attributes .'>';
+		if ($args->walker->has_children) {
+			$item_output .= '<a'. $attributes .'>';
+		}
+		else {
+			$item_output .= '<a'. $id . $class_names . $attributes .'>';
+		}
 		$item_output .= $args->link_before . $title . $args->link_after;
 		$item_output .= '</a>';
 		$item_output .= $args->after;
@@ -272,7 +281,12 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 			$t = "\t";
 			$n = "\n";
 		}
-		$output .= "</div>{$n}";
+		if ( $args->walker->has_children ) {
+			$output .= "</div>{$n}";
+		}
+		else {
+			$output .= "{$n}";
+		}
 	}
 
 } // Walker_Nav_Menu
